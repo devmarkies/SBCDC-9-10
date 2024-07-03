@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Information Form</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <section>
+    <span></span>
+    <span></span>
+    <div class="signin">
+      <div class="content">
+        <h2>User Information</h2>
+        <div class="form">
+          <div class="inputBox">
+            <input type="text" id="fullName" required>
+            <i>Full Name</i>
+          </div>
+          <div class="inputBox">
+            <input type="date" id="birthdate" required>
+            <i>Birthdate</i>
+          </div>
+          <div class="inputBox">
+            <input type="button" id="displayButton" value="Display">
+          </div>
+        </div>
+        <div id="result" class="result">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function calculateAge(birthdate) {
+      const today = new Date();
+      const birthDate = new Date(birthdate);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+
+    $(document).ready(function () {
+      $("#displayButton").click(function () {
+        const fullName = $("#fullName").val();
+        const birthdate = $("#birthdate").val();
+        const age = calculateAge(birthdate);
+        $("#result").html(`<p>Full Name: ${fullName}</p><p>Age: ${age}</p>`);
+      });
+    });
+  </script>
+</body>
+
+</html>
